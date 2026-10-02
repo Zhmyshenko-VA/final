@@ -1,0 +1,18 @@
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# HTTPS + без www (одним 301-редиректом)
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://5gringoscasino.vip%{REQUEST_URI} [L,R=301]
+
+# /index.html -> /  и  /gr/index.html -> /gr/
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^ /%1 [L,R=301]
+
+# Кодировка и типы файлов
+AddDefaultCharset utf-8
+AddType application/xml .xml
+AddType text/plain .txt
