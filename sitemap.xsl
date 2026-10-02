@@ -2,8 +2,7 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:s="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
-  exclude-result-prefixes="s xhtml">
+  exclude-result-prefixes="s">
 <xsl:output method="html" encoding="UTF-8" indent="yes"/>
 <xsl:template match="/">
 <html lang="en">
@@ -25,17 +24,13 @@
   main{padding:24px 16px}
   .count{margin:0 0 12px;color:#50575e}
   .card{background:#fff;border:1px solid #dcdcde;border-radius:6px;overflow-x:auto}
-  table{width:100%;min-width:760px;border-collapse:collapse}
+  table{width:100%;min-width:520px;border-collapse:collapse}
   th{text-align:left;background:#f6f7f7;font-weight:600;padding:12px 16px;border-bottom:1px solid #dcdcde;white-space:nowrap}
   td{padding:12px 16px;border-bottom:1px solid #f0f0f1;vertical-align:top}
   tr:last-child td{border-bottom:0}
   tbody tr:hover{background:#f9f9f9}
   td a{color:#2271b1;text-decoration:none;white-space:nowrap}
   td a:hover{text-decoration:underline}
-  .alt{list-style:none;margin:0;padding:0}
-  .alt li{margin:2px 0;display:flex;gap:8px;align-items:baseline}
-  .lang{display:inline-block;white-space:nowrap;min-width:68px;padding:1px 6px;border-radius:3px;background:#e7f5ec;color:#00733e;font:600 12px/1.6 ui-monospace,Menlo,Consolas,monospace;text-align:center}
-  .lang.def{background:#fcf0e3;color:#9a5a00}
   .date{white-space:nowrap;color:#50575e}
   footer{text-align:center;color:#8c8f94;font-size:12px;padding:0 16px 24px}
 </style>
@@ -51,25 +46,12 @@
   <p class="count">This sitemap contains <strong><xsl:value-of select="count(s:urlset/s:url)"/></strong> URLs.</p>
   <div class="card">
   <table>
-    <thead><tr><th>#</th><th>URL</th><th>Alternate languages (hreflang)</th><th>Last modified</th></tr></thead>
+    <thead><tr><th>#</th><th>URL</th><th>Last modified</th></tr></thead>
     <tbody>
     <xsl:for-each select="s:urlset/s:url">
       <tr>
         <td><xsl:value-of select="position()"/></td>
         <td><a href="{s:loc}"><xsl:value-of select="s:loc"/></a></td>
-        <td>
-          <ul class="alt">
-          <xsl:for-each select="xhtml:link[@rel='alternate']">
-            <li>
-              <span class="lang">
-                <xsl:if test="@hreflang='x-default'"><xsl:attribute name="class">lang def</xsl:attribute></xsl:if>
-                <xsl:value-of select="@hreflang"/>
-              </span>
-              <a href="{@href}"><xsl:value-of select="@href"/></a>
-            </li>
-          </xsl:for-each>
-          </ul>
-        </td>
         <td class="date"><xsl:value-of select="s:lastmod"/></td>
       </tr>
     </xsl:for-each>
