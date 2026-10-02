@@ -16,3 +16,4 @@ RewriteRule ^ /%1 [L,R=301]
 AddDefaultCharset utf-8
 AddType application/xml .xml
 AddType text/plain .txt
+AddType text/xsl .xsl
